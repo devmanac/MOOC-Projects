@@ -83,12 +83,20 @@ def get_scatter_plot(entered_site, selected_payload):
     payload_df = spacex_df[(spacex_df['Payload Mass (kg)'] > selected_payload[0]) & (spacex_df['Payload Mass (kg)'] < selected_payload[1]) ]
 
     if entered_site == 'ALL':
-        fig = px.scatter(payload_df, x="Payload Mass (kg)", y="class", color="Booster Version Category")
+        fig = px.scatter(payload_df, x="Payload Mass (kg)", y="class", 
+            color="Booster Version Category").update_layout(
+            yaxis_title="Launch Outcome"
+            )
+            
         return fig
     else:
         # return the outcomes piechart for a selected site
         filtered_df = payload_df[payload_df['Launch Site'] == entered_site]
-        fig = px.scatter(filtered_df, x="Payload Mass (kg)", y="class", color="Booster Version Category")
+        fig = px.scatter(filtered_df, x="Payload Mass (kg)", y="class", 
+            color="Booster Version Category").update_layout(
+            yaxis_title="Launch Outcome"
+            )
+            
         return fig
 # Run the app
 if __name__ == '__main__':
